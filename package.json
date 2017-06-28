@@ -1,13 +1,21 @@
 {
-  "name": "3th3reum",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "name": "lol",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "express": "^4.15.3",
-    "request": "^2.81.0"
+    "pug": "^2.0.0-rc.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "redis": "^2.7.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
   },
   "scripts": {
-    "start": "node index"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
