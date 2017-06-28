@@ -7,13 +7,15 @@
     "pug": "^2.0.0-rc.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "redis": "^2.7.1"
+    "redis": "^2.7.1",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node src/server/index.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
