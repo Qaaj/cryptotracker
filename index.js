@@ -1,17 +1,21 @@
 var express = require('express');
 var app = express();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
+app.get('/', (req, res) => {
+    res.send("polle is ne tettenkop");
+})
+
 app.get('/EUR', function (req, res) {
     var request = require('request');
     request('https://ethereumprice.org/api/pairs/?p=eur', function (error, response, body) {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({price:body}));
+        res.send(JSON.stringify({price: body}));
     });
 })
 
@@ -19,7 +23,7 @@ app.get('/USD', function (req, res) {
     var request = require('request');
     request('https://ethereumprice.org/api/pairs/?p=usd', function (error, response, body) {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({price:body}));
+        res.send(JSON.stringify({price: body}));
     });
 })
 
