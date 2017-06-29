@@ -1,3 +1,6 @@
+// require('ignore-styles');
+// require('babel-register');
+
 const os = require('os');
 const cluster = require('cluster');
 const redis = require('redis');

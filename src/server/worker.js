@@ -11,6 +11,7 @@ module.exports = (client) => {
 
     router.get('/api/:coin/:currency/:options', CurrencyPairs);
     router.get('/api/:coin/:currency', CurrencyPairs);
+    // router.get('/SSR', SSR);
 
     app
     .use(serve('./build/'))
