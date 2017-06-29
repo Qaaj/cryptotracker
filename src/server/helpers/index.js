@@ -1,16 +1,13 @@
+const request = require('request-promise');
+const REDIS_TIMEOUT = 30;
+
 module.exports = {
-    checkRedis: client => pair => new Promise((ok, nok) => {
-        console.log("Checking: " + pair);
-        client.get(pair, (err, value) => {
-            if (value) {
-                console.log("Fetching " + pair + ' from REDIS');
-                ok(value)
-            } else {
-                ok(false);
-            }
-        });
-    }),
-    isValid: urls => pair => {
+    getPair:  async(client, pair,endpoint) => {
+        let value = await client.getAsync(pair) || await request(endpoint.url);
+        client.set(pair, value, 'EX', REDIS_TIMEOUT);
+        return endpoint.parser(value);
+    },
+    isValid: (urls,pair) => {
         return urls[pair] || null;
     }
 }

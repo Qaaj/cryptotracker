@@ -1,5 +1,7 @@
 const pairs = require('./pairs');
 
-module.exports = {
-    CurrencyPairs: pairs
+module.exports = (client) => {
+    return {
+        CurrencyPairs: pairs(client)
+    }
 };
