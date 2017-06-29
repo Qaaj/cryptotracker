@@ -15,11 +15,8 @@ module.exports = (client) => {
     app
     .use(serve('./build/'))
     .use(router.routes())
-    .use(router.allowedMethods())
-    .use(async (ctx) => {
-        ctx.set("Access-Control-Allow-Origin", "*");
-        ctx.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    });
+    .use(router.allowedMethods());
+
 
     app.listen(PORT, () => console.log("Listening on port " + PORT))
 }
