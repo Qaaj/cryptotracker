@@ -62,7 +62,8 @@
     "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "deploy": "npm run build && git push heroku master"
+    "deploy": "npm run build && git push heroku master",
+    "postinstall": "npm run build"
   },
   "engines": {
     "node": ">= 7.6.0"

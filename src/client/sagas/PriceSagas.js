@@ -3,7 +3,7 @@ import {delay} from 'redux-saga'
 import PriceActions from '../redux/PricesRedux'
 import {PriceTypes} from '../redux/PricesRedux'
 
-const endpoint = (location.hostname === "localhost") ? 'http://localhost:3001/api/ETH/EUR' : '/api/ETH/EUR';
+const endpoint = (window.location.hostname === "localhost") ? 'http://localhost:3001/api/ETH/EUR' : '/api/ETH/EUR';
 
 export function* goUp() {
     yield delay(5000);
