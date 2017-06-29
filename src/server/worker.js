@@ -1,6 +1,8 @@
 const koa = require('koa');
 const app = new koa();
 const router = require('koa-router')();
+const serve = require('koa-static');
+
 const PORT = process.env.PORT || 3001;
 
 module.exports = (client) => {
@@ -11,6 +13,7 @@ module.exports = (client) => {
     router.get('/api/:coin/:currency', CurrencyPairs);
 
     app
+    .use(serve('./build/'))
     .use(router.routes())
     .use(router.allowedMethods())
     .use(async (ctx) => {
