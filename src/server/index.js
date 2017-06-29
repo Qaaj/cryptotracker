@@ -1,6 +1,8 @@
-const express = require('express');
-const app = express();
-const request = require('request');
+const koa = require('koa');
+const app = new koa();
+const router = require('koa-router')();
+
+const request = require('request-promise');
 const redis = require('redis');
 const redis_url = process.env.REDIS_URL || 'redis://localhost:6379';
 const PORT = process.env.PORT || 3001;
@@ -15,39 +17,35 @@ const checkPair = checkRedis(client);
 
 client.on("error", console.error);
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+const handler = async (ctx) => {
 
-app.get('/:coin/:currency/:options*?', (req, res) => {
+    ctx.set('Content-Type', 'application/json');
 
-    res.setHeader('Content-Type', 'application/json');
-
-    const {currency, coin, options} = req.params;
+    const {currency, coin, options} = ctx.params;
     const pair = options ? [coin, currency, options].join(':') : [coin, currency].join(':');
-    const endpoint = isValid(URLS)(pair) || res.send('Not a valid request');
-    const respond = finaliseResponse
-    ({currency, coin}) // Options
-    (res) // Response Object
-    (endpoint.parser); // Parsing for the data in Redis
 
-    checkPair(pair)
-        .then(item => respond(item))
-        .catch(() => {
-            request(endpoint.url, function (error, response, body) {
-                client.set(pair, body, 'EX', REDIS_TIMEOUT);
-                respond(body);
-            });
-        })
-})
+    const endpoint = isValid(URLS)(pair);
+    if (!endpoint) return ctx.body = 'Not a valid request';
 
+    let data = await checkPair(pair);
 
-const finaliseResponse = options => res => parser => data => {
-    options.data = parser(data);
-    res.send(options);
-}
+    if (!data) {
+        data = await request(endpoint.url)
+        client.set(pair, data, 'EX', REDIS_TIMEOUT);
+    }
 
+    ctx.body = {currency, coin, data: endpoint.parser(data)}
+};
+
+router.get('/:coin/:currency/:options', handler);
+router.get('/:coin/:currency', handler);
+
+app
+    .use(router.routes())
+    .use(router.allowedMethods())
+    .use(async (ctx) => {
+        ctx.set("Access-Control-Allow-Origin", "*");
+        ctx.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    });
 
 app.listen(PORT, () => console.log("Listening on port " + PORT))
