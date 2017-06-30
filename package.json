@@ -65,7 +65,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node src/server/index.js",
+    "start": "BABEL_ENV=server node src/server/index.js",
     "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",

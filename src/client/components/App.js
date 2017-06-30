@@ -25,7 +25,7 @@ class App extends Component {
 
         return (
             <div>
-                <AppHeader onClick={()=>this.doStuff()}>Data: {this.props.price || "Loading..."} - {this.state.txt}</AppHeader>
+                <AppHeader onClick={()=>this.doStuff()}>{this.props.price || "Loading..."}</AppHeader>
             </div>
         );
     }
