@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import SettingActions from '../redux/SettingRedux';
 
 const AppHeader = styled.h1`
     font-size: 40px;
@@ -10,11 +11,21 @@ const AppHeader = styled.h1`
 
 
 class App extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {};
+    }
+
+    doStuff(){
+        this.props.addPair('COOL','STUFF');
+    }
+
     render() {
 
         return (
             <div>
-                <AppHeader>{this.props.price || "Loading..."}</AppHeader>
+                <AppHeader onClick={()=>this.doStuff()}>Data: {this.props.price || "Loading..."} - {this.state.txt}</AppHeader>
             </div>
         );
     }
@@ -22,10 +33,18 @@ class App extends Component {
 
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         price: state.prices.price,
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPair: (data) => dispatch(SettingActions.addPair(data)),
+        removePair: (data) => dispatch(SettingActions.removePair(data))
+    }
+}
 
-export default connect(mapStateToProps)(App);
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

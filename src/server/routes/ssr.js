@@ -10,9 +10,11 @@ const React = require('react');
 
 module.exports = (client) => async (ctx) => {
 
-    const price = await getPair(client,'ETH:EUR',URLS['ETH:EUR']);
+    const price = await getPair(client, 'ETH:EUR', URLS['ETH:EUR']);
 
-    const emptyStore = { prices: {price} };
+    const emptyStore = {
+        prices: {price},
+    };
     const store = createStore(() => emptyStore, {})
 
     const sheet = new ServerStyleSheet()
@@ -26,10 +28,16 @@ module.exports = (client) => async (ctx) => {
         <head>
             <meta charset="UTF-8">
             <title>Title</title>
+            <script type="text/javascript">
+                window.__INITIAL_STATE__ = ${JSON.stringify(emptyStore)}
+            </script>
             ${css}
         </head>
         <body>
-            ${html}
+            <div id="root">${html}</div>
         </body>
+        <script type="text/javascript" src="/js/main.js"></script>
     </html>`
 };
+
+//        <script type="text/javascript" src="http://localhost:3000/static/js/bundle.js"></script>

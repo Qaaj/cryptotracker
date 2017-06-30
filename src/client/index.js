@@ -6,7 +6,7 @@ import App from './components/App';
 import { Provider } from 'react-redux'
 import createStore from './redux'
 
-const store = createStore()
+const store = createStore();
 
 window.store = store;
 

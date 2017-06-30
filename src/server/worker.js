@@ -14,7 +14,7 @@ module.exports = (client) => {
     router.get('/', SSR);
 
     app
-    // .use(serve('./build/'))
+    .use(serve('./build/static/'))
     .use(router.routes())
     .use(router.allowedMethods());
 

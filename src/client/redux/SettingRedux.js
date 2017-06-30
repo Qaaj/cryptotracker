@@ -27,6 +27,7 @@ export const setSetting = (state, {data}) => {
 
 export const addPair = (state, {data}) => {
     let activePairs = state.activePairs;
+    console.log(activePairs);
     activePairs = activePairs.asMutable();
     activePairs.push(data);
     state = state.setIn(['activePairs'], activePairs);
