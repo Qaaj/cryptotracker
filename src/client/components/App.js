@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import './App.css';
+import styled from 'styled-components';
+
+const AppHeader = styled.h1`
+    font-size: 40px;
+    text-align: center;
+	color: palevioletred;
+`;
+
 
 class App extends Component {
-
     render() {
+
         return (
-            <div className="App">
-                <div className="App-header">
-                    <h1>{this.props.price || "Loading..."}</h1>
-                </div>
+            <div>
+                <AppHeader>{this.props.price || "Loading..."}</AppHeader>
             </div>
         );
     }

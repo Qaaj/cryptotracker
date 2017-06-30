@@ -1,5 +1,4 @@
-// require('ignore-styles');
-// require('babel-register');
+require('babel-register');
 
 const os = require('os');
 const cluster = require('cluster');

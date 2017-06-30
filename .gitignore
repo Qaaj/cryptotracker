@@ -6,6 +6,10 @@
 # testing
 /coverage
 
+# Webstorm
+.idea
+.idea/
+
 # production
 /build
 

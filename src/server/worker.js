@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 3001;
 
 module.exports = (client) => {
 
-    const {CurrencyPairs} = require('./routes')(client);
+    const {CurrencyPairs, SSR} = require('./routes')(client);
 
     router.get('/api/:coin/:currency/:options', CurrencyPairs);
     router.get('/api/:coin/:currency', CurrencyPairs);
-    // router.get('/SSR', SSR);
+    router.get('/SSR', SSR);
 
     app
     .use(serve('./build/'))
