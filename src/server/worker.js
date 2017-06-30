@@ -11,10 +11,10 @@ module.exports = (client) => {
 
     router.get('/api/:coin/:currency/:options', CurrencyPairs);
     router.get('/api/:coin/:currency', CurrencyPairs);
-    router.get('/SSR', SSR);
+    router.get('/', SSR);
 
     app
-    .use(serve('./build/'))
+    // .use(serve('./build/'))
     .use(router.routes())
     .use(router.allowedMethods());
 
