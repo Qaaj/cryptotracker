@@ -23,7 +23,6 @@
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
     "socket.io-redis": "^5.1.0",
-    "sticky-session": "^1.1.2",
     "styled-components": "^2.1.0"
   },
   "devDependencies": {
@@ -80,7 +79,7 @@
     "postinstall": "npm run build"
   },
   "engines": {
-    "node": ">= 7.6.0"
+    "node": "7.1.0"
   },
   "jest": {
     "collectCoverageFrom": [
