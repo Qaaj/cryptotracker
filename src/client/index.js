@@ -9,7 +9,11 @@ import createStore from './redux'
 const store = createStore();
 
 window.store = store;
-const { socket }  = window;
 
-ReactDOM.render(<Provider store={store}><App socket={socket} /></Provider>, document.getElementById('root'));
+const socket = window.io();
+const workerID = window.workerID;
+
+console.log(workerID);
+
+ReactDOM.render(<Provider store={store}><App worker={workerID} socket={socket} /></Provider>, document.getElementById('root'));
 // registerServiceWorker();

@@ -36,8 +36,7 @@ module.exports = (client) => async (ctx) => {
             </script>
             <script src="/socket.io/socket.io.js"></script>
             <script>
-              var socket = io();
-              window.socket = socket;
+              window.workerID = ${cluster.worker.id}
             </script>
             ${css}
         </head>

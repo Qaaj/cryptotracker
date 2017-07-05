@@ -80,7 +80,8 @@ if (cluster.isMaster) {
 
         io.adapter(redis_io);
 
-        setInterval(() => io.emit('time', new Date().toTimeString()), 5000);
+
+        setInterval(() => io.emit(cluster.worker.id + ':time', new Date().toTimeString()), 5000);
 
         io.on('connection', socket => {
             console.log('connection', socket.id);
