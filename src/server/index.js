@@ -66,6 +66,12 @@ if (cluster.isMaster) {
         var worker = workers[worker_index(connection.remoteAddress, num_processes)];
         worker.send('sticky-session:connection', connection);
     }).listen(port);
+
+    var io = require('socket.io')(0);
+    const redis_io = adapter(redis_url);
+    io.adapter(redis_io);
+    setInterval(() => io.emit('time', new Date().toTimeString()), 5000);
+
 } else {
     // Note we don't use a port here because the master listens on it for us.
     var app = require('./worker')(client)
@@ -75,14 +81,14 @@ if (cluster.isMaster) {
     const attachIO = (server) =>{
 
         const redis_io = adapter(redis_url);
-        const sio = require('socket.io');
+
         const io = sio.listen(server);
 
         io.adapter(redis_io);
         io.set('transports', ['websocket', 'polling']);
 
+        setInterval(() => io.emit(cluster.worker.id + ':time', new Date().toTimeString()), 10000);
 
-        setInterval(() => io.emit(cluster.worker.id + ':time', new Date().toTimeString()), 5000);
 
         io.on('connection', socket => {
             console.log('connection', socket.id);

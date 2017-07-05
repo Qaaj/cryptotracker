@@ -17,7 +17,10 @@ class App extends Component {
         this.state = {};
         if(props.socket){
             props.socket.on(props.worker + ':time', function(timeString) {
-                console.log('time from props: ' + timeString);
+                console.log('Only for this worker: ' + timeString);
+            });
+            props.socket.on('time', function(timeString) {
+                console.log('For everyone: ' + timeString);
             });
         }
     }
@@ -38,7 +41,6 @@ class App extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         price: state.prices.price,
     }
