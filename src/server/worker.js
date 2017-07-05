@@ -13,6 +13,10 @@ module.exports = (client,redis_io) => {
     router.get('/api/:coin/:currency', CurrencyPairs);
     router.get('/', SSR);
 
+    router.get('/socket.io'),  async (ctx) => {
+        console.log(ctx);
+    }
+
     app
     .use(serve('./build/static/'))
     .use(router.routes())
@@ -30,6 +34,8 @@ module.exports = (client,redis_io) => {
     io.on('connection', socket => {
         console.log('connection', socket.id);
     });
+
+    return server;
 
 
 }

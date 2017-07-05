@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "bluebird": "^3.5.0",
+    "debug": "^2.6.8",
     "koa": "^2.3.0",
+    "koa-log-requests": "^1.0.0",
     "koa-router": "^7.2.1",
     "koa-static": "^3.0.0",
     "localforage": "^1.5.0",
@@ -21,6 +23,7 @@
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
     "socket.io-redis": "^5.1.0",
+    "sticky-session": "^1.1.2",
     "styled-components": "^2.1.0"
   },
   "devDependencies": {
@@ -70,6 +73,7 @@
   "scripts": {
     "start": "BABEL_ENV=server node src/server/index.js",
     "dev": "node scripts/start.js",
+    "srv": "BABEL_ENV=server nodemon src/server/index.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "npm run build && git push heroku master",

@@ -6,6 +6,7 @@ const {URLS} = require('../conf');
 const {getPair} = require('../helpers');
 const server = require('react-dom/server')
 const React = require('react');
+const cluster = require('cluster');
 
 
 module.exports = (client) => async (ctx) => {
@@ -16,6 +17,8 @@ module.exports = (client) => async (ctx) => {
         prices: {price},
     };
     const store = createStore(() => emptyStore, {})
+
+    console.log(cluster.worker.id);
 
     const sheet = new ServerStyleSheet()
     const html = server.renderToString(<App store={store}/>)
