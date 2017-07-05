@@ -5,7 +5,7 @@ const serve = require('koa-static');
 
 const PORT = process.env.PORT || 3001;
 
-module.exports = (client) => {
+module.exports = (client,redisIO) => {
 
     const {CurrencyPairs, SSR} = require('./routes')(client);
 
@@ -18,16 +18,19 @@ module.exports = (client) => {
     .use(router.routes())
     .use(router.allowedMethods());
 
-
     const server = app.listen(PORT, () => console.log("Listening on port " + PORT));
 
+
     const sio = require('socket.io');
-    const io = new sio(server);
+    const io = sio(server);
+
+    io.adapter(redisIO);
+
+    setInterval(() => io.emit('time', new Date().toTimeString()), 5000);
 
     io.on('connection', socket => {
         console.log('connection', socket.id);
     });
 
-    setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
 
 }
