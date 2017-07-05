@@ -15,9 +15,8 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {};
-        console.log(props);
         if(props.socket){
-            props.socket.on('time', function(timeString) {
+            props.socket.on('props .. time', function(timeString) {
                 console.log(timeString);
             });
         }

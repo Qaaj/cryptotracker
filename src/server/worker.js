@@ -2,10 +2,10 @@ const koa = require('koa');
 const app = new koa();
 const router = require('koa-router')();
 const serve = require('koa-static');
-
+const redis_url = process.env.REDIS_URL || 'redis://localhost:6379';
 const PORT = process.env.PORT || 3001;
 
-module.exports = (client,redisIO) => {
+module.exports = (client,redis_io) => {
 
     const {CurrencyPairs, SSR} = require('./routes')(client);
 
@@ -20,11 +20,10 @@ module.exports = (client,redisIO) => {
 
     const server = app.listen(PORT, () => console.log("Listening on port " + PORT));
 
-
     const sio = require('socket.io');
     const io = sio(server);
 
-    io.adapter(redisIO);
+    io.adapter(redis_io);
 
     setInterval(() => io.emit('time', new Date().toTimeString()), 5000);
 
