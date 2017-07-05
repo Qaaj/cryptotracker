@@ -79,6 +79,7 @@ if (cluster.isMaster) {
         const io = sio.listen(server);
 
         io.adapter(redis_io);
+        io.set('transports', ['websocket', 'polling']);
 
 
         setInterval(() => io.emit(cluster.worker.id + ':time', new Date().toTimeString()), 5000);

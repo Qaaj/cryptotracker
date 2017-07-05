@@ -10,7 +10,7 @@ const store = createStore();
 
 window.store = store;
 
-const socket = window.io();
+const socket = window.io({ reconnect: true, transports: ['websocket', 'polling'] });
 const workerID = window.workerID;
 
 console.log(workerID);
