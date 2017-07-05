@@ -79,7 +79,7 @@
     "postinstall": "npm run build"
   },
   "engines": {
-    "node": "7.1.0"
+    "node": "7.6.0"
   },
   "jest": {
     "collectCoverageFrom": [
