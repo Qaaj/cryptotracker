@@ -19,5 +19,15 @@ module.exports = (client) => {
     .use(router.allowedMethods());
 
 
-    app.listen(PORT, () => console.log("Listening on port " + PORT))
+    const server = app.listen(PORT, () => console.log("Listening on port " + PORT));
+
+    const sio = require('socket.io');
+    const io = new sio(server);
+
+    io.on('connection', socket => {
+        console.log('connection', socket.id);
+    });
+
+    setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
+
 }

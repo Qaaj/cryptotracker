@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import SettingActions from '../redux/SettingRedux';
+var socket = require('socket.io-client')('http://localhost:3001');
 
 const AppHeader = styled.h1`
     font-size: 40px;
@@ -15,6 +16,9 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {};
+        socket.on('time', function(timeString) {
+            console.log(timeString);
+        });
     }
 
     doStuff(){

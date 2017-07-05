@@ -18,6 +18,8 @@
     "reduxsauce": "^0.5.0",
     "request-promise": "^4.2.1",
     "seamless-immutable": "^7.1.2",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
     "styled-components": "^2.1.0"
   },
   "devDependencies": {

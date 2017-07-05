@@ -31,13 +31,16 @@ module.exports = (client) => async (ctx) => {
             <script type="text/javascript">
                 window.__INITIAL_STATE__ = ${JSON.stringify(emptyStore)}
             </script>
+            <script src="/socket.io/socket.io.js"></script>
             ${css}
         </head>
         <body>
             <div id="root">${html}</div>
         </body>
-        <script type="text/javascript" src="/js/main.js"></script>
+         <script type="text/javascript" src="/js/main.js"></script>
     </html>`
 };
 
+//                <script type="text/javascript" src="/js/main.js"></script>
 //        <script type="text/javascript" src="http://localhost:3000/static/js/bundle.js"></script>
+
