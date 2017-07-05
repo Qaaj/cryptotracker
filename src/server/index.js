@@ -9,13 +9,16 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 
 const redis_url = process.env.REDIS_URL || 'redis://localhost:6379';
 const client = redis.createClient(redis_url);
+//
+// if (cluster.isMaster) {
+//     for (let i = 0; i < (process.env.NODE_ENV === 'production' ? os.cpus().length : 1); i++) {
+//         cluster.fork();
+//     }
+// } else {
+//     require('./worker')(client)
+// }
 
-if (cluster.isMaster) {
-    for (let i = 0; i < (process.env.NODE_ENV === 'production' ? os.cpus().length : 1); i++) {
-        cluster.fork();
-    }
-} else {
-    require('./worker')(client)
-}
+require('./worker')(client)
+
 
 client.on("error", console.error);
