@@ -5,12 +5,9 @@ const redis_io = adapter(redis_url);
 const cluster = require('cluster');
 
 const {getPair} = require('../controllers/pairs');
-const {isValid} = require('../helpers');
-const {URLS} = require('../conf');
 
 const sendPair = async (io) => {
     const pair = 'ETH:EUR';
-    const endpoint = isValid(URLS, pair);
     let data = await getPair(pair);
     io.emit('ETH:EUR', data);
 }
@@ -26,7 +23,6 @@ class SocketService {
 
     tick() {
         if (Object.keys(this.activeConnections).length > 0) {
-            console.log("Sending.");
             sendPair(this.io)
         }
     }
