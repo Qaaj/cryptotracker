@@ -17,7 +17,7 @@ module.exports = (client) => async (ctx) => {
         prices: {price},
     };
     const store = createStore(() => emptyStore, {})
-    
+
     const sheet = new ServerStyleSheet()
     const html = server.renderToString(<App store={store}/>)
     const css = sheet.getStyleTags() // or sheet.getStyleElement()
