@@ -2,7 +2,7 @@
 
 Full-stack project showcasing the latest and greatest in Web technologies. 
 
-Server-side rendered React application that is pre-populated with data on the server, and rehydrates on the client-side using localstorage/WebSQL/IndexedDB.
+Server-side rendered React application that is pre-populated with data on the server, and rehydrates on the client-side using localstorage/WebSQL/IndexedDB. Price updates are pushed to the frontend using websockets and clients are assigned to their own node cluster using IP mapping.
 
 - [koa](http://koajs.com) a minimal web framework relying heavily on async/await
   - [koa-router](https://www.npmjs.com/package/koa-router) for handling API routes.
@@ -16,3 +16,4 @@ Server-side rendered React application that is pre-populated with data on the se
   
 - [react-dom/server](https://www.npmjs.com/package/react-dom) for server-side rendering.
 - [styled-components](https://www.npmjs.com/package/styled-components) reusable CSS-in-JS with easy integration for SSR.
+- [socket.io](https://www.npmjs.com/package/socket.io) real-time pushing of the latest prices to the frontend using websockets.
