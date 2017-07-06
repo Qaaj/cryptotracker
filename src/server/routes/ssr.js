@@ -11,7 +11,7 @@ const cluster = require('cluster');
 
 module.exports = (client) => async (ctx) => {
 
-    const price = await getPair('ETH:EUR');
+    const price = await getPair(client,'ETH:EUR');
 
     const emptyStore = {
         prices: {price},

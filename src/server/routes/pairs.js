@@ -9,7 +9,7 @@ module.exports = (client) => async (ctx) => {
     const endpoint = URLS[pair];
     if (!endpoint) return ctx.body = 'Not a valid request';
 
-    let data = await getPair(pair,endpoint);
+    let data = await getPair(client,pair,endpoint);
 
     ctx.set("Access-Control-Allow-Origin", "*");
     ctx.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

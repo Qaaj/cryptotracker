@@ -9,9 +9,9 @@ const {SocketService} = require('./socket');
 
 module.exports = {
 
-    master: () => {
+    master: (client) => {
 
-        const service = new SocketService();
+        const service = new SocketService(client);
         const workers = [];
 
         const messageFromWorker = (worker) => (message) => {
@@ -20,16 +20,16 @@ module.exports = {
             if(msg === "socket:disconnect")  service.socketDisonnected(socket);
         }
 
-        const workerDied = (worker) => (code, signal) => {
+        const workerDied = (worker,i) => (code, signal) => {
             console.log('respawning worker', worker);
-            spawn();
+            spawn(i);
         }
 
-        const spawn = () => {
+        const spawn = (i) => {
             const worker = cluster.fork();
-            workers[worker.id] = worker;
+            workers[i] = worker;
             worker.on('message', messageFromWorker(worker));
-            worker.on('exit', workerDied(worker));
+            worker.on('exit', workerDied(worker,i));
         }
 
         for (var i = 0; i < num_processes; i++) {

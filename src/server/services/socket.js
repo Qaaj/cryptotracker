@@ -6,16 +6,17 @@ const cluster = require('cluster');
 
 const {getPair} = require('../controllers/pairs');
 
-const sendPair = async (io) => {
+const sendPair = async (client,io) => {
     const pair = 'ETH:EUR';
-    let data = await getPair(pair);
+    let data = await getPair(client,pair);
     io.emit('ETH:EUR', data);
 }
 
 
 class SocketService {
 
-    constructor() {
+    constructor(client) {
+        this.client = client;
         this.io = require('socket.io')(0);
         this.io.adapter(adapter(redis_url));
         this.activeConnections = {};
@@ -23,7 +24,7 @@ class SocketService {
 
     tick() {
         if (Object.keys(this.activeConnections).length > 0) {
-            sendPair(this.io)
+            sendPair(this.client,this.io)
         }
     }
 

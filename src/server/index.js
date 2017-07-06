@@ -14,7 +14,7 @@ const client = redis.createClient(redis_url);
 if (cluster.isMaster) {
 
     /* Fake Server in the master process that tunnels requests to our workers */
-    require('./services/clustering').master();
+    require('./services/clustering').master(client);
 
 } else {
 
