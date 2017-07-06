@@ -69,10 +69,10 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "BABEL_ENV=server node src-es5/server/index.js",
+    "start": "BABEL_ENV=server NODE_ENV=production node src-es5/server/index.js",
     "buildES5": "babel src  --presets=es2015,react --out-dir src-es5",
-    "dev": "node scripts/start.js",
-    "srv": "BABEL_ENV=server nodemon src/server/babel.js",
+    "dev-server": "BABEL_ENV=server NODE_ENV=dev nodemon src/server/babel.js",
+    "dev-client": "node scripts/start.js",
     "build": "npm run buildES5 && node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "npm run build && git push heroku master",

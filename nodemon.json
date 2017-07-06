@@ -1,0 +1,11 @@
+{
+  "ignore": [
+    "/build",
+    "/config",
+    "/node_modules",
+    "/public",
+    "/scripts",
+    "/src/client",
+    "package.json"
+  ]
+}
