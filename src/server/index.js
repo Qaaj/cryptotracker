@@ -14,7 +14,7 @@ const cluster = require('cluster'),
     sio = require('socket.io')
 
 const port = process.env.PORT || 3001;
-const num_processes =  4; //require('os').cpus().length;
+const num_processes =  4; // require('os').cpus().length; - Heroku free dyno complains about too many Redis connections above 4
 
 if (cluster.isMaster) {
     // This stores our workers. We need to keep them to be able to reference

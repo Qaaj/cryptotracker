@@ -21,7 +21,6 @@
     "request-promise": "^4.2.1",
     "seamless-immutable": "^7.1.2",
     "socket.io": "^2.0.3",
-    "socket.io-client": "^2.0.3",
     "socket.io-redis": "^5.1.0",
     "styled-components": "^2.1.0"
   },
@@ -70,13 +69,15 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "BABEL_ENV=server node src/server/index.js",
+    "start": "BABEL_ENV=server node src-es5/server/index.js",
+    "buildES5": "babel src  --presets=es2015,react --out-dir src-es5",
     "dev": "node scripts/start.js",
-    "srv": "BABEL_ENV=server nodemon src/server/index.js",
-    "build": "node scripts/build.js",
+    "srv": "BABEL_ENV=server nodemon src/server/babel.js",
+    "build": "npm run buildES5 && node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "npm run build && git push heroku master",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "clean": "rm -rf build && rm -rf src-es5"
   },
   "engines": {
     "node": "7.6.0"

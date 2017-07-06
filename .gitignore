@@ -10,6 +10,9 @@
 .idea
 .idea/
 
+#es5 build files
+/src-es5
+
 # production
 /build
 
