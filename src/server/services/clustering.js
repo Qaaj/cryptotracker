@@ -1,5 +1,5 @@
 const port = process.env.PORT || 3001;
-const num_processes = 4; // require('os').cpus().length;
+const num_processes = 2; // require('os').cpus().length;
 const cluster = require('cluster');
 const net = require('net');
 
