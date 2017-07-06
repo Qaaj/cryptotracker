@@ -1,7 +1,6 @@
-const bluebird = require('bluebird');
 const cluster = require('cluster');
 const net = require('net');
-
+const bluebird = require('bluebird');
 
 const redis = require('redis'); bluebird.promisifyAll(redis.RedisClient.prototype);
 const redis_url = process.env.REDIS_URL || 'redis://localhost:6379';

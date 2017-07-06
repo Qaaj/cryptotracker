@@ -16,10 +16,10 @@ class App extends Component {
         super(props);
         this.state = {};
         if(props.socket){
-            props.socket.on(props.worker + ':time', function(timeString) {
+            props.socket.on(props.worker + ':time', (timeString) => {
                 console.log('Only for this worker: ' + timeString);
             });
-            props.socket.on('time', function(timeString) {
+            props.socket.on('ETH:EUR', (timeString) => {
                 console.log('For everyone: ' + timeString);
             });
         }

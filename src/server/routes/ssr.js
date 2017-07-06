@@ -3,7 +3,7 @@ import App from '../../client/components/App.js'
 import {createStore} from 'redux'
 
 const {URLS} = require('../conf');
-const {getPair} = require('../helpers');
+const {getPair} = require('../controllers/pairs');
 const server = require('react-dom/server')
 const React = require('react');
 const cluster = require('cluster');
@@ -11,7 +11,7 @@ const cluster = require('cluster');
 
 module.exports = (client) => async (ctx) => {
 
-    const price = await getPair(client, 'ETH:EUR', URLS['ETH:EUR']);
+    const price = await getPair('ETH:EUR');
 
     const emptyStore = {
         prices: {price},
