@@ -29,8 +29,8 @@ export const request = (state) => {
 
 export const success = (state, {data}) => {
     // console.log('Price Arrived', data);
-    const {price} = data;
-    return state.merge({fetching: false, error: null, price})
+    const {etheur} = data;
+    return state.merge({fetching: false, error: null, price: etheur})
 }
 
 export const failure = (state, {error}) =>

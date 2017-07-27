@@ -4,12 +4,13 @@ const sio = require('socket.io');
 const redis_io = adapter(redis_url);
 const cluster = require('cluster');
 
-const {getPair} = require('../controllers/pairs');
+const {getPair, getEtherDelta} = require('../controllers/pairs');
 
 const sendPair = async (client,io) => {
-    const pair = 'ETH:EUR';
-    let data = await getPair(client,pair);
-    io.emit('ETH:EUR', data);
+    let etheur = await getPair(client,'ETH:EUR');
+    let ethusd = await getPair(client,'ETH:USD');
+    let etherdelta = await getEtherDelta();
+    io.emit('prices', {etheur, ethusd, etherdelta});
 }
 
 
