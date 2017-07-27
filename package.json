@@ -15,6 +15,7 @@
     "react-redux": "^5.0.5",
     "redis": "^2.7.1",
     "redux": "^3.7.1",
+    "redux-mock-store": "^1.2.3",
     "redux-persist": "^4.8.1",
     "redux-saga": "^0.15.4",
     "reduxsauce": "^0.5.0",
@@ -71,10 +72,10 @@
   "scripts": {
     "start": "BABEL_ENV=server NODE_ENV=production node src-es5/server/index.js",
     "buildES5": "babel src  --presets=es2015,react --out-dir src-es5",
-    "dev-server": "BABEL_ENV=server NODE_ENV=dev nodemon src/server/babel.js",
-    "dev-client": "node scripts/start.js",
+    "dev:server": "BABEL_ENV=server NODE_ENV=dev nodemon src/server/babel.js",
+    "dev:client": "node scripts/start.js",
     "build": "npm run buildES5 && node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "test": "BABEL_ENV=test node scripts/test.js --env=jsdom",
     "deploy": "npm run build && git push heroku master",
     "postinstall": "npm run build",
     "clean": "rm -rf build && rm -rf src-es5"

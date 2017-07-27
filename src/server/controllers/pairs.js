@@ -15,4 +15,9 @@ const getPair = async (client, pair, endpoint) => {
     return endpoint.parser(value);
 }
 
-module.exports = { getPair }
+const getEtherDelta = async () => {
+    let value = await(request('https://cache1.etherdelta.com/returnTicker'));
+    return JSON.parse(value);
+}
+
+module.exports = { getPair, getEtherDelta }

@@ -5,10 +5,11 @@ const serve = require('koa-static');
 
 module.exports = (client) => {
 
-    const {CurrencyPairs, SSR} = require('./routes')(client);
+    const {CurrencyPairs, SSR, EtherDelta} = require('./routes')(client);
 
     router.get('/api/:coin/:currency/:options', CurrencyPairs);
     router.get('/api/:coin/:currency', CurrencyPairs);
+    router.get('/api/etherdelta', EtherDelta);
     router.get('/', SSR);
 
     app
