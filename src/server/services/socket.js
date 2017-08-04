@@ -9,7 +9,7 @@ const {getPair, getEtherDelta} = require('../controllers/pairs');
 const sendPair = async (client,io) => {
     let etheur = await getPair(client,'ETH:EUR');
     let ethusd = await getPair(client,'ETH:USD');
-    let etherdelta = await getEtherDelta();
+    let etherdelta = await getEtherDelta(client);
     io.emit('prices', {etheur, ethusd, etherdelta});
 }
 
@@ -30,7 +30,7 @@ class SocketService {
     }
 
     startTicking() {
-        this.intervalID = setInterval(() => this.tick(), 5000);
+        this.intervalID = setInterval(() => this.tick(), 10000);
     }
 
     stopTicking() {

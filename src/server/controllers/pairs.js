@@ -1,6 +1,6 @@
 const request = require('request-promise');
 const {URLS} = require('../conf');
-const REDIS_TIMEOUT = 50;
+const REDIS_TIMEOUT = 15;
 
 const getPair = async (client, pair, endpoint) => {
 
@@ -15,9 +15,16 @@ const getPair = async (client, pair, endpoint) => {
     return endpoint.parser(value);
 }
 
-const getEtherDelta = async () => {
-    let value = await(request('https://cache1.etherdelta.com/returnTicker'));
+const getEtherDelta = async (client) => {
+
+    let value = await client.getAsync('EtherDelta');
+
+    if (!value) {
+        console.log('NOT FOUND - FETCHING');
+        value = await(request('https://cache1.etherdelta.com/returnTicker'));
+        client.set('EtherDelta', JSON.stringify(value), 'EX', REDIS_TIMEOUT);
+    }
     return JSON.parse(value);
 }
 
-module.exports = { getPair, getEtherDelta }
+module.exports = {getPair, getEtherDelta}

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^2.12.3",
     "bluebird": "^3.5.0",
     "debug": "^2.6.8",
     "koa": "^2.3.0",

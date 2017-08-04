@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import SettingActions from '../redux/SettingRedux';
+import {DatePicker, message} from 'antd';
+import 'antd/dist/antd.css'
 
 const AppHeader = styled.h1`
     font-size: 40px;
@@ -12,20 +14,27 @@ const AppHeader = styled.h1`
 
 class App extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {date: '',};
     }
 
-    doStuff(){
-        this.props.addPair('COOL','STUFF');
+    doStuff() {
+        this.props.addPair('COOL', 'STUFF');
+    }
+
+    handleChange(date) {
+        message.info('Selected Date: ' + date.toString());
+        this.setState({ date });
     }
 
     render() {
 
         return (
             <div>
-                <AppHeader onClick={()=>this.doStuff()}>{this.props.price || "Loading..."}</AppHeader>
+                <AppHeader onClick={() => this.doStuff()}>{this.props.price || "Loading..."}</AppHeader>
+                <DatePicker onChange={value => this.handleChange(value)} />
+                <div style={{ marginTop: 20 }}>Date: {this.state.date.toString()}</div>
             </div>
         );
     }
@@ -46,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

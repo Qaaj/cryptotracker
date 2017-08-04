@@ -38,6 +38,7 @@ module.exports = (client) => async (ctx) => {
             <script>
               window.workerID = ${cluster.worker.id}
             </script>
+            <link rel="stylesheet" type="text/css" href="theme.css">
             ${css}
         </head>
         <body>
