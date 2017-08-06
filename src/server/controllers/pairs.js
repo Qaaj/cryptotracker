@@ -21,7 +21,7 @@ const getEtherDelta = async (client) => {
 
     if (!value) {
         console.log('NOT FOUND - FETCHING');
-        value = JSON.parse(await(request('https://cache1.etherdelta.com/returnTicker')));
+        value = JSON.parse(await(request(process.env.ETHERDELTA)));
         Object.keys(value).forEach(key => {
             let pair = value[key];
             delete pair.quoteVolume;
