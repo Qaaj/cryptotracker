@@ -21,8 +21,17 @@ const getEtherDelta = async (client) => {
 
     if (!value) {
         console.log('NOT FOUND - FETCHING');
-        value = await(request('https://cache1.etherdelta.com/returnTicker'));
-        client.set('EtherDelta', JSON.stringify(value), 'EX', REDIS_TIMEOUT);
+        value = JSON.parse(await(request('https://cache1.etherdelta.com/returnTicker')));
+        Object.keys(value).forEach(key => {
+            let pair = value[key];
+            delete pair.quoteVolume;
+            delete pair.baseVolume;
+            pair.percentChange = parseInt((pair.percentChange * 100000)) / 100000;
+            pair.last = parseInt((pair.last * 1000000000)) / 1000000000;
+
+        })
+        value = JSON.stringify(value);
+        client.set('EtherDelta', value, 'EX', REDIS_TIMEOUT);
     }
     return JSON.parse(value);
 }

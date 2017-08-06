@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import SettingActions from '../redux/SettingRedux';
 import {DatePicker, message} from 'antd';
-import 'antd/dist/antd.css'
 
 const AppHeader = styled.h1`
     font-size: 40px;

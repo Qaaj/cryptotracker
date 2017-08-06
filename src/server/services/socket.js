@@ -30,6 +30,7 @@ class SocketService {
     }
 
     startTicking() {
+        this.tick();
         this.intervalID = setInterval(() => this.tick(), 10000);
     }
 
