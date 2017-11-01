@@ -1,10 +1,16 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import {autoRehydrate} from 'redux-persist'
-import createSagaMiddleware from 'redux-saga'
 import RehydrationServices from '../services/RehydrationServices'
 import ReduxPersist from '../config/ReduxPersist'
 import Immutable from 'seamless-immutable'
+import ReduxThunk from 'redux-thunk'
+import io from 'socket.io-client';
+import createSocketIoMiddleware from 'redux-socket.io';
 
+const io_options = {reconnect: true, transports: ['websocket', 'polling']};
+const socket = window.io ? window.io(io_options) : io('localhost:3001',io_options);
+
+let socketIoMiddleware = createSocketIoMiddleware(socket, "");
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -12,16 +18,8 @@ export default (rootReducer, rootSaga) => {
     const middleware = []
     const enhancers = []
 
-    // const storeEnhancer = () => (createStore) => (reducer, preloadedState, enhancer) => {
-    //     console.log(reducer, preloadedState, enhancer);
-    //     preloadedState = window.__INITIAL_STATE__ || {};
-    //     console.log(preloadedState);
-    //     const store = createStore(reducer, preloadedState, enhancer)
-    //     return store;
-    // }
-
-    const sagaMiddleware = createSagaMiddleware()
-    middleware.push(sagaMiddleware)
+    middleware.push(ReduxThunk)
+    middleware.push(socketIoMiddleware)
 
     enhancers.push(applyMiddleware(...middleware))
 
@@ -44,11 +42,6 @@ export default (rootReducer, rootSaga) => {
     if (ReduxPersist.active) {
         RehydrationServices.updateReducers(store)
     }
-
-    // kick off root saga
-    sagaMiddleware.run(rootSaga)
-
-    // console.log(store.getState());
-
+    
     return store
 }

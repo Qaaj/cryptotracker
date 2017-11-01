@@ -4,9 +4,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const {Types, Creators} = createActions({
-    fetchRequest: null,
-    fetchSuccess: ['data'],
-    fetchFailure: null,
+    prices: ['data'],
 })
 
 export const PriceTypes = Types
@@ -23,25 +21,15 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const request = (state) => {
-    return state.merge({fetching: true})
-}
-
-export const success = (state, {data}) => {
-    // console.log('Price Arrived', data);
+export const showPrices = (state , {data}) => {
     const {etheur} = data;
     return state.merge({fetching: false, error: null, price: etheur})
 }
-
-export const failure = (state, {error}) =>
-    state.merge({fetching: false, error})
 
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.FETCH_REQUEST]: request,
-    [Types.FETCH_SUCCESS]: success,
-    [Types.FETCH_FAILURE]: failure,
+    [Types.PRICES]: showPrices,
 })
 

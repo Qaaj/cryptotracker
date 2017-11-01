@@ -10,7 +10,7 @@ Server-side rendered React application that is pre-populated with data on the se
   
 - [redis](https://www.npmjs.com/package/redis) for caching of data/sharing it between instances and to prevent overfetching.
 - [redux](https://www.npmjs.com/package/redux) for state management on the client side. also uses [seamless-immutable](https://www.npmjs.com/package/seamless-immutable) to ensure immutability
-  - [redux-saga](https://www.npmjs.com/package/redux-saga) for an synchronous approach to async data fetching using generators.
+  - [redux-socket.io](https://www.npmjs.com/package/redux-socket.io) for direct pushing of new state from the server side to client and vice-versa.
   - [redux-persist](https://www.npmjs.com/package/redux-persist) and [localforage](https://www.npmjs.com/package/localforage) for persistent data on the clientside using redux store rehydration.
   - [reduxsauce](https://www.npmjs.com/package/reduxsauce) to minimise boilerplate code.
   
