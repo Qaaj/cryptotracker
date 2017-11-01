@@ -1,12 +1,15 @@
 import {ServerStyleSheet} from 'styled-components'
 import App from '../../client/components/App.js'
 import {createStore} from 'redux'
+import {LocaleProvider} from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
 
 const {URLS} = require('../conf');
 const {getPair} = require('../controllers/pairs');
 const server = require('react-dom/server')
 const React = require('react');
 const cluster = require('cluster');
+
 
 
 module.exports = (client) => async (ctx) => {
@@ -19,7 +22,7 @@ module.exports = (client) => async (ctx) => {
     const store = createStore(() => emptyStore, {})
 
     const sheet = new ServerStyleSheet()
-    const html = server.renderToString(<App store={store}/>)
+    const html = server.renderToString(<LocaleProvider locale={enUS}><App store={store}/></LocaleProvider>)
     const css = sheet.getStyleTags() // or sheet.getStyleElement()
 
     const js_bundle = process.env.NODE_ENV === 'production' ? '/js/main.js' : 'http://localhost:3000/static/js/bundle.js';
@@ -38,7 +41,7 @@ module.exports = (client) => async (ctx) => {
             <script>
               window.workerID = ${cluster.worker.id}
             </script>
-            <link rel="stylesheet" type="text/css" href="/css/antd.min.css">
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/antd/2.13.8/antd.min.css">
             ${css}
         </head>
         <body>

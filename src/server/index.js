@@ -10,7 +10,6 @@ const {attachSocketIO} = require('./services/socket');
 
 const client = redis.createClient(redis_url);
 
-
 if (cluster.isMaster) {
 
     /* Fake Server in the master process that tunnels requests to our workers */

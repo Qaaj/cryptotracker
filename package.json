@@ -41,6 +41,7 @@
     "babel-runtime": "6.23.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chalk": "1.1.3",
+    "cross-env": "^5.1.1",
     "css-loader": "0.28.1",
     "dotenv": "4.0.0",
     "eslint": "3.19.0",
@@ -71,12 +72,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "BABEL_ENV=server NODE_ENV=production node src-es5/server/index.js",
+    "start": "cross-env BABEL_ENV=server NODE_ENV=production node src-es5/server/index.js",
     "buildES5": "babel src  --presets=es2015,react --out-dir src-es5",
-    "dev:server": "BABEL_ENV=server NODE_ENV=dev nodemon src/server/babel.js",
+    "dev:server": "cross-env BABEL_ENV=server NODE_ENV=dev nodemon src/server/babel.js",
     "dev:client": "node scripts/start.js",
     "build": "npm run buildES5 && node scripts/build.js",
-    "test": "BABEL_ENV=test node scripts/test.js --env=jsdom",
+    "test": "cross-env BABEL_ENV=test node scripts/test.js --env=jsdom",
     "deploy": "npm run build && git push heroku master",
     "postinstall": "npm run build && cp node_modules/antd/dist/antd.min.css build/static/css/antd.min.css",
     "clean": "rm -rf build && rm -rf src-es5"
