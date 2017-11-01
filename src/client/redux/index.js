@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux'
 import configureStore from './CreateStore'
-import rootSaga from '../sagas/'
 
 export default () => {
 
@@ -11,5 +10,5 @@ export default () => {
     })
 
 
-    return configureStore(rootReducer, rootSaga)
+    return configureStore(rootReducer)
 }
