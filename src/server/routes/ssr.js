@@ -1,9 +1,9 @@
 import {ServerStyleSheet} from 'styled-components'
 import App from '../../client/components/App.js'
-import {createStore} from 'redux'
+// import {createStore} from 'redux'
 import {LocaleProvider} from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-
+import createStore from '../../client/redux'
 const {URLS} = require('../conf');
 const {getPair} = require('../controllers/pairs');
 const server = require('react-dom/server')
@@ -17,9 +17,11 @@ module.exports = (client) => async (ctx) => {
     const price = await getPair(client,'ETH:EUR');
 
     const emptyStore = {
-        prices: {price},
+      prices: {price},
     };
-    const store = createStore(() => emptyStore, {})
+
+    const store = createStore(emptyStore);
+
 
     const sheet = new ServerStyleSheet()
     const html = server.renderToString(<LocaleProvider locale={enUS}><App store={store}/></LocaleProvider>)
