@@ -10,6 +10,8 @@
 .idea
 .idea/
 
+vars
+
 #es5 build files
 /src-es5
 
