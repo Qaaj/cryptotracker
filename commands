@@ -1,2 +1,7 @@
- docker build -t cryptotracker . -f Dockerfile.txt
- PS E:\Projects\cryptotracker> docker run -e REDIS_URL='...' --env-file vars -p 3001:3001 cryptotracker
+docker build -t cryptotracker . -f Dockerfile.txt
+docker run -e REDIS_URL='...' --env-file vars -p 3001:3001 cryptotracker
+
+docker tag cryptotracker:latest 781057470561.dkr.ecr.us-west-2.amazonaws.com/test:latest
+
+docker push 781057470561.dkr.ecr.us-west-2.amazonaws.com/test:latest
+
