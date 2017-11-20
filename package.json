@@ -82,7 +82,6 @@
     "build": "npm run buildES5 && node scripts/build.js",
     "test": "cross-env BABEL_ENV=test node scripts/test.js --env=jsdom",
     "deploy": "npm run build && git push heroku master",
-    "postinstall": "npm run build && cp node_modules/antd/dist/antd.min.css build/static/css/antd.min.css",
     "clean": "rm -rf build && rm -rf src-es5"
   },
   "engines": {
