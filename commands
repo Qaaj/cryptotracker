@@ -1,7 +1,25 @@
-docker build -t cryptotracker . -f Dockerfile.txt
+docker build -t cryptotracker . -f Dockerfile
 docker run -e REDIS_URL='...' --env-file vars -p 3001:3001 cryptotracker
 
 docker tag cryptotracker:latest 781057470561.dkr.ecr.us-west-2.amazonaws.com/test:latest
 
 docker push 781057470561.dkr.ecr.us-west-2.amazonaws.com/test:latest
 
+aws ecr --no-include-email get-login
+
+docker network list
+docker network create <network>
+docker network inspect <network>
+
+-d detached mode
+
+/var/lib/cloud/scripts/per-boot
+
+sudo chmod +x <script>
+
+34.209.248.211
+
+docker run --name testredis -p 6379:6379 --network mynetwork redis
+docker run --name cryptoTracker -p 3001:3001 -e REDIS_URL=redis://testredis:6379 --network mynetwork cryptotracker
+
+docker run --name cryptoTracker -p 3001:3001 -e REDIS_URL=redis://testredis:6379 --network mynetwork 781057470561.dkr.ecr.us-west-2.amazonaws.com/test
