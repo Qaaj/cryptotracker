@@ -1,5 +1,5 @@
 const adapter = require('socket.io-redis');
-const redis_url = process.env.REDIS_URL || 'redis://localhost:6379';
+const redis_url = process.env.REDIS_URL || 'redis://redis:6379';
 const sio = require('socket.io');
 const redis_io = adapter(redis_url);
 const cluster = require('cluster');

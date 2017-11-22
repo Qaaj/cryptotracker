@@ -3,7 +3,7 @@ const net = require('net');
 const bluebird = require('bluebird');
 
 const redis = require('redis'); bluebird.promisifyAll(redis.RedisClient.prototype);
-const redis_url = process.env.REDIS_URL || 'redis://localhost:6379';
+const redis_url = process.env.REDIS_URL || 'redis://redis:6379';
 
 const {serverListensToMessage} = require('./helpers');
 const {attachSocketIO} = require('./services/socket');

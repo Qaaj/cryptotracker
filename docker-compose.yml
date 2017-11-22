@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - 3001:3001
+    depends_on:
+      - redis
+    environment:
+        - ETHUSD=https://ethereumprice.org/api/pairs/?p=usd
+        - ETHEUR=https://ethereumprice.org/api/pairs/?p=eur
+  redis:
+    image: "redis:alpine"
